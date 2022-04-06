@@ -1,0 +1,120 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 400px;
+    min-height: 500px;
+    padding: 45px 0;
+    background-color: #2F3D40;
+    border-radius: 20px 20px 15% 15%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.screen {
+    width: 300px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    background-color: #B3DBE6;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+    border-radius: 10px 10px 25px 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19) inset, 0 6px 6px rgba(0,0,0,0.23) inset;
+}
+.current-display {
+    font-size: 24px;
+}
+.button-container {
+    display: grid;
+    width: 300px;
+    height: 300px;
+    gap: 10px;
+    grid-template-areas:
+    "clear clear del del" 
+    "num7 num8 num9 div"
+    "num4 num5 num6 mul"
+    "num1 num2 num3 minus"
+    "num0 dec equal plus";
+}
+button {
+    border-radius: 10%;
+    border: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.num,
+.decimal,
+.equal {
+    background-color: #66797e;
+    color: aliceblue;
+}
+.op {
+    background-color: #C0C0C0;
+}
+.clear,
+.delete {
+    background-color: #181d1f;
+    color: aliceblue;
+}
+.num0 {
+    grid-area: num0;
+}
+.num1 {
+    grid-area: num1;
+}
+.num2 {
+    grid-area: num2;
+}
+.num3 {
+    grid-area: num3;
+}
+.num4 {
+    grid-area: num4;
+}
+.num5 {
+    grid-area: num5;
+}
+.num6 {
+    grid-area: num6;
+}
+.num7 {
+    grid-area: num7;
+}
+.num8 {
+    grid-area: num8;
+}
+.num9 {
+    grid-area: num9;
+}
+.decimal {
+    grid-area: dec;
+}
+.equal {
+    grid-area: equal;
+}
+.div {
+    grid-area: div;
+}
+.mul {
+    grid-area: mul;
+}
+.minus {
+    grid-area: minus;
+}
+.plus {
+    grid-area: plus;
+}
+.clear {
+    grid-area: clear;
+}
+.delete {
+    grid-area: del;
+}
