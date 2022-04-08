@@ -52,7 +52,6 @@ window.addEventListener('keydown', function (e) {
     if (!numKey) return;
     display(numKey);
     e.preventDefault();
-    console.log(numKey);
 });
 window.addEventListener('keydown', function (e) {
     const opKey = document.querySelector(`.op[data-key="${e.key}"]`);
@@ -103,8 +102,6 @@ function display(key) {
     }
     calculate.currentNum += key.textContent;
     displayCurrent.textContent = calculate.currentNum;
-    console.log(calculate.currentNum);
-    console.log(calculate);
 }
 function displayNew(key){
     if (calculate.currentNum !== '' && calculate.equal !== '=') {
@@ -116,7 +113,6 @@ function displayNew(key){
         calculate.currentNum = '';
         calculate.equal = '';
         displayCurrent.textContent = calculate.previousNum;
-        console.log(calculate);
     }
     displayPrevious.textContent = `${calculate.previousNum} ${key.textContent}`;
     calculate.operator = key.textContent;
@@ -127,7 +123,6 @@ function displayOperations() {
         displayPrevious.textContent = `${calculate.previousNum} ${calculate.operator} ${calculate.currentNum} =`;
         calculate.currentNum = newCal;
         displayCurrent.textContent = newCal;
-        console.log(calculate);
     }
 }
 function evaluate(key) {
@@ -142,16 +137,12 @@ function clear() {
     }
     displayCurrent.textContent = calculate.currentNum;
     displayPrevious.textContent = calculate.previousNum;
-    console.log(calculate);
 }
 function deleteNum() {
     calculate.currentNum = calculate.currentNum.toString();
     numLength = calculate.currentNum.length;
     calculate.currentNum = calculate.currentNum.substring(0, numLength - 1);
     displayCurrent.textContent = calculate.currentNum;
-    console.log(numLength);
-    console.log(calculate.currentNum);
-    console.log(calculate);
 }
 function addDecimal() {
     if (!calculate.currentNum.toString().includes('.')) {
