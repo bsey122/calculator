@@ -29,20 +29,55 @@ let displayPrevious = document.createTextNode('');
 previous.appendChild(displayPrevious);
 current.appendChild(displayCurrent);
 numButtons.forEach((button) => {
-    button.addEventListener('click', display);
+    button.addEventListener('click', (e) => {
+        display(e.target);
+        e.preventDefault();
+    });
 });
 operatorButtons.forEach((button) => {
-    button.addEventListener('click', displayNew);
+    button.addEventListener('click', (e) => {
+        displayNew(e.target);
+        e.preventDefault();
+    });
 });
-equalButton.addEventListener('click',function (e) {
-    if (calculate.equal === '') {
-        calculate.equal = e.target.textContent;
-        displayOperations();
-    }
+equalButton.addEventListener('click', (e) => {
+    evaluate(e.target);
+    e.preventDefault();
 });
 clearButton.addEventListener('click', clear);
 deleteButton.addEventListener('click', deleteNum);
 decimalButton.addEventListener('click', addDecimal);
+window.addEventListener('keydown', function (e) {
+    const numKey = document.querySelector(`.num[data-key="${e.key}"]`);
+    if (!numKey) return;
+    display(numKey);
+    e.preventDefault();
+    console.log(numKey);
+});
+window.addEventListener('keydown', function (e) {
+    const opKey = document.querySelector(`.op[data-key="${e.key}"]`);
+    if (!opKey) return;
+    displayNew(opKey);
+    e.preventDefault();
+});
+window.addEventListener('keydown', function (e) {
+    const equalKey = document.querySelector(`.equal[data-key="${e.key}"]`);
+    if (!equalKey) return;
+    evaluate(equalKey);
+    e.preventDefault();
+});
+window.addEventListener('keydown', function (e) {
+    const decimalKey = document.querySelector(`.decimal[data-key="${e.key}"]`);
+    if (!decimalKey) return;
+    addDecimal();
+    e.preventDefault();
+});
+window.addEventListener('keydown', function (e) {
+    const delKey = document.querySelector(`.delete[data-key="${e.key}"]`);
+    if (!delKey) return;
+    deleteNum();
+    e.preventDefault();
+});
 function operate(operator, num1, num2) {
     const choice = operator;
     switch (choice) {
@@ -59,32 +94,32 @@ function operate(operator, num1, num2) {
             break;
     }
 }
-function display(e) {
+function display(key) {
     if (calculate.equal === '=') {
         calculate.previousNum = calculate.currentNum;
         calculate.currentNum = '';
         calculate.equal = '';
         calculate.operator = '';
     }
-    calculate.currentNum += e.target.textContent;
+    calculate.currentNum += key.textContent;
     displayCurrent.textContent = calculate.currentNum;
     console.log(calculate.currentNum);
     console.log(calculate);
 }
-function displayNew(e){
+function displayNew(key){
     if (calculate.currentNum !== '' && calculate.equal !== '=') {
         displayOperations();
     }
     if (calculate.operator === '' || (calculate.currentNum !== '' && calculate.operator !== '')) {
-        calculate.operator = e.target.textContent;
+        calculate.operator = key.textContent;
         calculate.previousNum = calculate.currentNum;
         calculate.currentNum = '';
         calculate.equal = '';
         displayCurrent.textContent = calculate.previousNum;
         console.log(calculate);
     }
-    displayPrevious.textContent = `${calculate.previousNum} ${e.target.textContent}`;
-    calculate.operator = e.target.textContent;
+    displayPrevious.textContent = `${calculate.previousNum} ${key.textContent}`;
+    calculate.operator = key.textContent;
 }
 function displayOperations() {
     if (calculate.operator !== '' && calculate.currentNum !== '' && calculate.previousNum !== '' ) {
@@ -93,6 +128,12 @@ function displayOperations() {
         calculate.currentNum = newCal;
         displayCurrent.textContent = newCal;
         console.log(calculate);
+    }
+}
+function evaluate(key) {
+    if (calculate.equal === '') {
+        calculate.equal = key.textContent;
+        displayOperations();
     }
 }
 function clear() {
